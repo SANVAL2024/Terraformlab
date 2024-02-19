@@ -22,5 +22,5 @@ resource "aws_instance" "my_ec2_instance" {
   ami           = "ami-0e731c8a588258d0d"
   instance_type = "t2.micro"
   subnet_id     = aws_subnet.subnet1.id
-  security_groups = [aws_security_group.my_security_group.name]
+  security_groups = [aws_security_group.my_security_group.id]
 }  
