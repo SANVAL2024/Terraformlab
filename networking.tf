@@ -6,14 +6,14 @@ resource "aws_vpc" "my_vpc" {
 # Define subnet 1
 resource "aws_subnet" "subnet1" {
   vpc_id                  = aws_vpc.my_vpc.id
-  cidr_block              = "10.0.0.0/24"
+  cidr_block              = "10.0.0.0/28"
   availability_zone       = "us-east-1a"
 }
 
 # Define subnet 2
 resource "aws_subnet" "subnet2" {
   vpc_id                  = aws_vpc.my_vpc.id
-  cidr_block              = "10.0.0.16/24"
+  cidr_block              = "10.0.0.16/28"
   availability_zone       = "us-east-1b"
 }
 
