@@ -20,10 +20,17 @@ locals {
   s3_origin_id = "myS3Origin"
 }
 
+resource "aws_cloudfront_origin_access_control" "oacsandra" {
+  name                              = "oacsandra"
+  origin_access_control_origin_type = "s3"
+  signing_behavior                  = "always"
+  signing_protocol                  = "sigv4"
+}
+
 resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name              = aws_s3_bucket.bucketweb.bucket_regional_domain_name
-    origin_access_control_id = aws_cloudfront_origin_access_control.default.id
+    origin_access_control_id = aws_cloudfront_origin_access_control.oacsandra.id
     origin_id                = local.s3_origin_id
   }
 
