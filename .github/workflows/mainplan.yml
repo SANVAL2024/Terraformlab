@@ -19,5 +19,7 @@ jobs:
         aws-region: us-east-1
     - name: run-terraformplan
       run: |
+        terraform fmt
+        terraform validate
         terraform init
         terraform plan
