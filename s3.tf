@@ -1,6 +1,28 @@
 resource "aws_s3_bucket" "bucketweb" {
   bucket = "bucketweb-sandra-aws"
+  policy = <<EOF
+  {
+    "Version": "2008-10-17",
+    "Id": "PolicyForCloudFrontPrivateContent",
+    "Statement": [
+        {
+            "Sid": "AllowCloudFrontServicePrincipal",
+            "Effect": "Allow",
+            "Principal": {
+                "Service": "cloudfront.amazonaws.com"
+            },
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::bucketweb-sandra-aws/*",
+            "Condition": {
+                "StringEquals": {
+                    "AWS:SourceArn": "arn:aws:cloudfront::654654553207:distribution/E4N8JD4R37PP5"
+                }
+            }
+        }
+    ]
+} 
 }
+  EOF
 
 resource "aws_s3_bucket_acl" "bucketacl" {
   bucket = aws_s3_bucket.bucketweb.id
@@ -57,3 +79,4 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
     cloudfront_default_certificate = true
   }
 }
+
