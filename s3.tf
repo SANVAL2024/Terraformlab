@@ -1,7 +1,6 @@
 resource "aws_s3_bucket" "bucketweb" {
   bucket = "bucketweb-sandra-aws"
-  policy = <<EOF
-  {
+  policy = jsonencode({
     "Version": "2008-10-17",
     "Id": "PolicyForCloudFrontPrivateContent",
     "Statement": [
@@ -20,9 +19,8 @@ resource "aws_s3_bucket" "bucketweb" {
             }
         }
     ]
-} 
+}) 
 }
-  EOF
 
 resource "aws_s3_bucket_acl" "bucketacl" {
   bucket = aws_s3_bucket.bucketweb.id
